@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // For navigation
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast, Toaster } from "react-hot-toast";
 import "./Login.css";
 import services from "./../utils/config/services.js";
 
@@ -14,6 +13,7 @@ function LoginPage() {
 
   return (
     <div className="app-container">
+      <Toaster position="top-right" reverseOrder={false} />
       <div className="tabs">
         <button
           className={`tab-button ${activeTab === "user" ? "active" : ""}`}
@@ -75,6 +75,8 @@ function UserForm() {
           password: formData.password,
         };
 
+    const loadingToast = toast.loading("Processing...");
+
     try {
       const response = await fetch(apiUrl, {
         method: "POST",
@@ -85,23 +87,18 @@ function UserForm() {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success(data.message || (isRegister ? "Registration successful!" : "Login successful!"));
-        console.log("Response:", data);
-
+        toast.success(data.message || (isRegister ? "Registration successful!" : "Login successful!"), {
+          id: loadingToast,
+        });
         if (!isRegister) {
           navigate("/user");
         }
       } else {
-        // Display backend error message if available
-        if (data.message) {
-          toast.error(data.message);
-        } else {
-          toast.error("Something went wrong!");
-        }
+        toast.error(data.message || "Something went wrong!", { id: loadingToast });
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error("Failed to connect to the server!");
+      toast.error("Failed to connect to the server!", { id: loadingToast });
     }
   };
 
@@ -178,6 +175,8 @@ function AdminForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const loadingToast = toast.loading("Processing...");
+
     try {
       const response = await fetch(`${services.baseURL}/admin/login`, {
         method: "POST",
@@ -191,21 +190,15 @@ function AdminForm() {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success(data.message || "Admin Login successful!");
-        console.log("Response:", data);
-        localStorage.setItem("AdminEmail",formData.email);
+        toast.success(data.message || "Admin Login successful!", { id: loadingToast });
+        localStorage.setItem("AdminEmail", formData.email);
         navigate("/admin");
       } else {
-        // Display backend error message if available
-        if (data.message) {
-          toast.error(data.message);
-        } else {
-          toast.error("Something went wrong!");
-        }
+        toast.error(data.message || "Something went wrong!", { id: loadingToast });
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error("Failed to connect to the server!");
+      toast.error("Failed to connect to the server!", { id: loadingToast });
     }
   };
 
