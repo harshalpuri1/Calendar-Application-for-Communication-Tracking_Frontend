@@ -1,0 +1,217 @@
+/* Updated src/components/UserDashboard.css */
+.dashboard-container {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  color: #333;
+  line-height: 1.8;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.company-table {
+  width: 80%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border-radius: 8px;
+  margin-left: 10%;
+}
+
+.company-table th, .company-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.company-table th {
+  background: linear-gradient(90deg, #4caf50, #81c784);
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.company-table td {
+  font-size: 14px;
+}
+
+.company-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.company-table tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s ease;
+}
+
+.highlight-red {
+  background-color: #f8d7da;
+}
+
+.highlight-yellow {
+  background-color: #fff3cd;
+}
+
+.communication-item {
+  position: relative;
+  cursor: pointer;
+}
+
+.addCommButton {
+  width: 50%;
+  margin-top: 10px;
+  margin-left: 25%;
+  text-align: center;
+}
+
+.tooltip {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+}
+
+.communication-item:hover .tooltip {
+  display: block;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Style for the modal container */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  z-index: 1000; /* In front of the backdrop */
+  animation: fadeIn 0.3s ease-in-out;
+  line-height: 1.8;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Input fields inside the modal */
+.modal input,
+.modal select,
+.modal textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Buttons inside the modal */
+.modal button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.modal button:hover {
+  background-color: #45a049;
+}
+
+/* Cancel button */
+.modal button[type="button"] {
+  background-color: #f44336;
+}
+
+.modal button[type="button"]:hover {
+  background-color: #d32f2f;
+}
+
+/* Add a backdrop with blur effect */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 999; /* Behind the modal */
+}
+
+/* Fade-in animation for the modal */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Updated floating buttons at the top */
+.navbar-buttons {
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 100; /* Navbar style */
+}
+
+.navbar-button {
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-button:hover {
+  background-color: #0056b3;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}

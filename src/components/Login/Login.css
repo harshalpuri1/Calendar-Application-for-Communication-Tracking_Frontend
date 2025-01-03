@@ -1,0 +1,152 @@
+.app-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .tab-button {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+    cursor: pointer;
+  }
+  
+  .tab-button.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+  
+  .tab-content {
+    border: 1px solid #ddd;
+    padding: 20px;
+    background: #fff;
+    border-radius: 4px;
+  }
+  
+  .form-container {
+    text-align: left;
+  }
+  
+  input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  button:hover {
+    background: #0056b3;
+  }
+  
+  .form-options {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin: 10px 0;
+  }
+  
+  .toggle-mode {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .toggle-mode:hover {
+    text-decoration: none;
+  }
+
+
+  /* Custom styles for ToastContainer */
+.Toastify__toast-container {
+  font-family: 'Arial', sans-serif; /* Customize font */
+  font-size: 1rem; /* Customize font size */
+}
+
+/* Customize the position of toast notifications */
+.Toastify__toast-container--top-right {
+  top: 20px;
+  right: 20px;
+}
+
+.Toastify__toast-container--top-left {
+  top: 20px;
+  left: 20px;
+}
+
+.Toastify__toast-container--bottom-right {
+  bottom: 20px;
+  right: 20px;
+}
+
+.Toastify__toast-container--bottom-left {
+  bottom: 20px;
+  left: 20px;
+}
+
+/* Customize individual toast */
+.Toastify__toast {
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow */
+  padding: 16px; /* Padding for content */
+  color: #fff; /* Text color */
+}
+
+/* Success toast */
+.Toastify__toast--success {
+  background: linear-gradient(45deg, #28a745, #218838); /* Green gradient */
+}
+
+/* Error toast */
+.Toastify__toast--error {
+  background: linear-gradient(45deg, #dc3545, #c82333); /* Red gradient */
+}
+
+/* Customize close button */
+.Toastify__close-button {
+  color: #fff;
+}
+
+.Toastify__close-button:hover,
+.Toastify__close-button:focus {
+  opacity: 0.8; /* Hover effect */
+}
+
+/* Customize progress bar */
+.Toastify__progress-bar {
+  background: #ffc107; /* Yellow color for progress bar */
+}
+
+.Toastify__progress-bar--success {
+  background: #218838; /* Green for success progress bar */
+}
+
+.Toastify__progress-bar--error {
+  background: #c82333; /* Red for error progress bar */
+}
+
+  

@@ -1,0 +1,154 @@
+/* General styles */
+.body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f9;
+}
+
+.calendar-container {
+  width: 60%;
+  margin-left: 20%;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.header {
+  font-size: 24px;
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.calendar-header {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  background: linear-gradient(90deg, #4facfe, #00f2fe);
+  color: white;
+  padding: 10px 0;
+  border-radius: 5px;
+}
+
+/* Calendar Grid */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 7 / 6; /* Ensures a rectangular 7x6 grid shape */
+}
+
+/* Calendar Cell */
+.calendar-cell {
+  width: 100%;
+  padding-top: 100%; /* Aspect ratio for square shape */
+  position: relative;
+  background: #f4f4f9;
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.calendar-cell span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.calendar-cell.empty {
+  background: transparent;
+  cursor: default;
+}
+
+.calendar-cell:hover {
+  background: #e0f7fa;
+  transform: scale(1.1);
+}
+
+.calendar-cell.highlight {
+  background: #81d4fa;
+  color: white;
+  font-weight: bold;
+}
+
+/* Month Navigation Buttons */
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.navigation-button {
+  background: #00bcd4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.navigation-button:hover {
+  background: #008c9e;
+  transform: scale(1.05);
+}
+
+.navigation-button:disabled {
+  background: #b2ebf2;
+  cursor: not-allowed;
+}
+
+/* Details popup */
+.details-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  z-index: 100;
+  animation: popup-slide-in 0.4s ease forwards;
+}
+
+.details-popup h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.details-popup p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.details-popup button {
+  background: #00bcd4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.details-popup button:hover {
+  background: #008c9e;
+}

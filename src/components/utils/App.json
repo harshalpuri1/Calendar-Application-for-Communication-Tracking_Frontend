@@ -1,0 +1,7 @@
+{
+    "main": "/",
+    "signin": "/signin",
+    "signup": "/signup",
+    "certificate": "/certificate",
+    "settings": "/settings"
+}

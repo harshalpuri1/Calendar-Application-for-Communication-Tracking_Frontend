@@ -1,0 +1,198 @@
+/* Container for the Company Management */
+div {
+    font-family: 'Arial', sans-serif;
+}
+
+/* Title of the page */
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+/* Styling the form and inputs */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input,
+textarea,
+select {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    /* width: 100%; */
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #4caf50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+input:hover,
+textarea:hover,
+select:hover {
+    border-color: #4caf50;
+}
+
+/* Styling the button */
+button {
+    padding: 12px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Styling the company list section */
+.company-list {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Grid layout for the company items */
+.company-list ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+    gap: 20px; /* Spacing between the grid items */
+    padding: 0;
+    list-style-type: none;
+}
+
+/* Styling for each company item */
+.company-list li {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    height: 150px; /* Set square-like dimensions */
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.company-list li:hover {
+    background-color: #e3f2e1;
+    transform: translateY(-2px);
+}
+
+/* Action buttons inside each company item */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.EDbutton{
+    display: flex;
+    justify-content: space-around;
+}
+
+.EDbutton button{
+    width: 100px;
+    margin: 5px;
+}
+
+.action-buttons button {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.action-buttons .edit-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.action-buttons .edit-btn:hover {
+    background-color: #0056b3;
+}
+
+.action-buttons .delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.action-buttons .delete-btn:hover {
+    background-color: #b02a37;
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
+    .company-list ul {
+        grid-template-columns: repeat(2, 1fr); /* 2 items per row */
+    }
+
+    .form {
+        gap: 10px;
+    }
+
+    input,
+    textarea,
+    select {
+        font-size: 0.9rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .action-buttons button {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .company-list ul {
+        grid-template-columns: 1fr; /* 1 item per row */
+    }
+
+    div {
+        padding: 15px;
+    }
+
+    button {
+        font-size: 0.85rem;
+    }
+
+    .company-list {
+        padding: 15px;
+    }
+}
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
