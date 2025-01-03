@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import './Notifications.css';
+import { BellDot } from "lucide-react";
 
 const NotificationPage = () => {
   const [notifications] = useState([
@@ -17,7 +18,8 @@ const NotificationPage = () => {
     <div className="notification-container">
       <div className="notifications-header">
         <h1>Notifications</h1>
-        <div className="notification-badge">
+        <div className="notification-badge-dot">
+        <BellDot />
           {notifications.filter((notif) => notif.dueDate === today || notif.overdue).length}
         </div>
       </div>
