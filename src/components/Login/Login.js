@@ -18,12 +18,14 @@ function LoginPage() {
         <button
           className={`tab-button ${activeTab === "user" ? "active" : ""}`}
           onClick={() => handleTabSwitch("user")}
+          id="userTab"
         >
           User Login
         </button>
         <button
           className={`tab-button ${activeTab === "admin" ? "active" : ""}`}
           onClick={() => handleTabSwitch("admin")}
+          id="adminTab"
         >
           Admin Login
         </button>
@@ -75,7 +77,14 @@ function UserForm() {
           password: formData.password,
         };
 
+        toast(
+          "Sorry for the inconvenience, but our backend is currently on render.com Sometimes it gives late response. Please try again in 30 seconds.",
+          {
+            duration: 6000,
+          }
+        );
     const loadingToast = toast.loading("Processing...");
+
 
     try {
       const response = await fetch(apiUrl, {
@@ -114,6 +123,8 @@ function UserForm() {
             value={formData.username}
             onChange={handleInputChange}
             required
+            className="input-field"
+            id="usernameInput"
           />
         )}
         <input
@@ -123,6 +134,8 @@ function UserForm() {
           value={formData.email}
           onChange={handleInputChange}
           required
+          className="input-field"
+          id="emailInput"
         />
         <input
           type="password"
@@ -131,6 +144,8 @@ function UserForm() {
           value={formData.password}
           onChange={handleInputChange}
           required
+          className="input-field"
+          id="passwordInput"
         />
         {isRegister && (
           <input
@@ -140,18 +155,23 @@ function UserForm() {
             value={formData.confirmPassword}
             onChange={handleInputChange}
             required
+            className="input-field"
+            id="confirmPasswordInput"
           />
         )}
         <div className="form-options">
-          <a href="/forgot-password">Forgot your password?</a>
+          <a href="/forgot-password" id="forgotPasswordLink">Forgot your password?</a>
         </div>
-        <button type="submit">{isRegister ? "Register" : "Log In"}</button>
+        <button type="submit" className="submit-button" id="userSubmitButton">
+          {isRegister ? "Register" : "Log In"}
+        </button>
       </form>
       <p>
         {isRegister ? "Already have an account? " : "Don’t have an account? "}
         <span
           className="toggle-mode"
           onClick={() => setIsRegister(!isRegister)}
+          id="toggleModeUser"
         >
           {isRegister ? "Log In" : "Register"}
         </span>
@@ -175,6 +195,12 @@ function AdminForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    toast(
+      "Sorry for the inconvenience, but our backend is currently on render.com Sometimes it gives late response. Please try again in 30 seconds.",
+      {
+        duration: 6000,
+      }
+    );
     const loadingToast = toast.loading("Processing...");
 
     try {
@@ -213,6 +239,8 @@ function AdminForm() {
           value={formData.email}
           onChange={handleInputChange}
           required
+          className="input-field"
+          id="adminEmailInput"
         />
         <input
           type="password"
@@ -221,11 +249,15 @@ function AdminForm() {
           value={formData.password}
           onChange={handleInputChange}
           required
+          className="input-field"
+          id="adminPasswordInput"
         />
         <div className="form-options">
-          <a href="/forgot-password">Forgot your password?</a>
+          <a href="/forgot-password" id="forgotPasswordLinkAdmin">Forgot your password?</a>
         </div>
-        <button type="submit">Log In</button>
+        <button type="submit" className="submit-button" id="adminSubmitButton">
+          Log In
+        </button>
       </form>
     </div>
   );

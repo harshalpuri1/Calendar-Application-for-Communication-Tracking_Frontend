@@ -1,4 +1,4 @@
-/* Updated src/components/UserDashboard.css */
+/* Global Styling */
 .dashboard-container {
   font-family: Arial, sans-serif;
   margin: 20px;
@@ -11,18 +11,20 @@ h2 {
   margin-bottom: 20px;
 }
 
+/* Table Styling */
 .company-table {
-  width: 80%;
+  width: 90%;
   border-collapse: collapse;
   margin-top: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   border-radius: 8px;
-  margin-left: 10%;
+  margin-left: 5%;
 }
 
-.company-table th, .company-table td {
-  padding: 10px;
+.company-table th,
+.company-table td {
+  padding: 12px;
   border: 1px solid #ddd;
   text-align: left;
 }
@@ -32,10 +34,6 @@ h2 {
   color: white;
   font-weight: bold;
   text-transform: uppercase;
-}
-
-.company-table td {
-  font-size: 14px;
 }
 
 .company-table tr:nth-child(even) {
@@ -55,23 +53,17 @@ h2 {
   background-color: #fff3cd;
 }
 
+/* Communication Item Styling */
 .communication-item {
   position: relative;
   cursor: pointer;
 }
 
-.addCommButton {
-  width: 50%;
-  margin-top: 10px;
-  margin-left: 25%;
-  text-align: center;
-}
-
-.tooltip {
+.communication-item .tooltip {
   display: none;
   position: absolute;
   background-color: #333;
-  color: #fff;
+  color: white;
   padding: 5px;
   border-radius: 5px;
   font-size: 0.9rem;
@@ -84,12 +76,38 @@ h2 {
   display: block;
 }
 
-button:disabled {
+/* Add Communication Button */
+.addCommButton {
+  width: 50%;
+  margin-top: 20px;
+  margin-left: 25%;
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.addCommButton:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-/* Style for the modal container */
+/* Modal Styling */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 999; /* Behind the modal */
+}
+
 .modal {
   position: fixed;
   top: 50%;
@@ -111,7 +129,6 @@ button:disabled {
   gap: 15px;
 }
 
-/* Input fields inside the modal */
 .modal input,
 .modal select,
 .modal textarea {
@@ -123,10 +140,9 @@ button:disabled {
   box-sizing: border-box;
 }
 
-/* Buttons inside the modal */
 .modal button {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   border: none;
   border-radius: 5px;
   background-color: #4caf50;
@@ -139,7 +155,6 @@ button:disabled {
   background-color: #45a049;
 }
 
-/* Cancel button */
 .modal button[type="button"] {
   background-color: #f44336;
 }
@@ -148,19 +163,7 @@ button:disabled {
   background-color: #d32f2f;
 }
 
-/* Add a backdrop with blur effect */
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px);
-  z-index: 999; /* Behind the modal */
-}
-
-/* Fade-in animation for the modal */
+/* Fade-in Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -172,7 +175,7 @@ button:disabled {
   }
 }
 
-/* Updated floating buttons at the top */
+/* Floating Navbar Buttons */
 .navbar-buttons {
   position: fixed;
   top: 10px;
@@ -214,4 +217,26 @@ button:disabled {
   align-items: center;
   justify-content: center;
   font-size: 12px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .company-table {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .addCommButton {
+    width: 80%;
+    margin-left: 10%;
+  }
+
+  .modal {
+    width: 90%;
+  }
+
+  .navbar-buttons {
+    top: 20px;
+    right: 10px;
+  }
 }
