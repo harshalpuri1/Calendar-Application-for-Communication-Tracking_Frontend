@@ -1,17 +1,22 @@
 import axios from "axios";
 import constants from "../utils/config/config";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import services from "../utils/config/services";
 
 const apiInstance = axios.create({
   baseURL: services.baseURL,
-  timeout: 10000,
+  timeout: 50000,
 });
 
 apiInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem(constants.localStorage.token);
-    config.headers[constants.localStorage.authToken] = `Bearer ${token}`;
+    const userToken = localStorage.getItem(constants.localStorage.userToken);
+    const adminToken = localStorage.getItem(constants.localStorage.adminToken);
+    if (userToken) {
+      config.headers[constants.localStorage.authToken] = `Bearer ${userToken}`;
+    } else if (adminToken) {
+      config.headers[constants.localStorage.authToken] = `Bearer ${adminToken}`;
+    }
     return config;
   },
   (error) => {
@@ -66,14 +71,18 @@ const registerAdmin = async (body) => {
 const loginAdmin = async (body) => {
   try {
     const response = await apiInstance.post(constants.apiName.loginAdmin, body);
-    return response.data ? response.data : response;
+    if (response.data && response.data.token) {
+      localStorage.setItem(constants.localStorage.adminToken, response.data.token);
+    }
+    return response ? response.data : response;
   } catch (error) {
     return error.data ? error.data : error;
   }
 };
+
 const registerUser = async (body) => {
   try {
-    const response = await apiInstance.post(constants.apiName.signup, body);
+    const response = await apiInstance.post(constants.apiName.signupUser, body);
     return response.data ? response.data : response;
   } catch (error) {
     return error.data ? error.data : error;
@@ -82,7 +91,10 @@ const registerUser = async (body) => {
 
 const loginUser = async (body) => {
   try {
-    const response = await apiInstance.post(constants.apiName.login, body);
+    const response = await apiInstance.post(constants.apiName.loginUser, body);
+    if (response.data && response.data.token) {
+      localStorage.setItem(constants.localStorage.userToken, response.data.token);
+    }
     return response.data ? response.data : response;
   } catch (error) {
     return error.data ? error.data : error;
@@ -92,6 +104,53 @@ const loginUser = async (body) => {
 const logoutUser = async () => {
   try {
     const response = await apiInstance.post(constants.apiName.logout);
+    localStorage.removeItem(constants.localStorage.userToken);
+    localStorage.removeItem(constants.localStorage.adminToken);
+    return response.data ? response.data : response;
+  } catch (error) {
+    return error.data ? error.data : error;
+  }
+};
+
+const forgotPassword = async (body) => {
+  try {
+    const response = await apiInstance.post(constants.apiName.forgotPassword, body);
+    return response.data ? response.data : response;
+  } catch (error) {
+    return error.data ? error.data : error;
+  }
+};
+
+const getCompanies = async (params) => {
+  try {
+    const response = await apiInstance.get("/company/get", { params });
+    return response ? response : response.data;
+  } catch (error) {
+    return error.data ? error.data : error;
+  }
+};
+
+const createCompany = async (body) => {
+  try {
+    const response = await apiInstance.post("/company/add", body);
+    return response.data ? response.data : response;
+  } catch (error) {
+    return error.data ? error.data : error;
+  }
+};
+
+const updateCompany = async (id, body) => {
+  try {
+    const response = await apiInstance.put(`/company/update/${id}`, body);
+    return response.data ? response.data : response;
+  } catch (error) {
+    return error.data ? error.data : error;
+  }
+};
+
+const deleteCompany = async (id) => {
+  try {
+    const response = await apiInstance.delete(`/company/delete/${id}`);
     return response.data ? response.data : response;
   } catch (error) {
     return error.data ? error.data : error;
@@ -103,8 +162,12 @@ const api = {
   loginAdmin,
   registerUser,
   loginUser,
-  logoutUser
+  logoutUser,
+  forgotPassword,
+  getCompanies,
+  createCompany,
+  updateCompany,
+  deleteCompany
 };
 
 export default api;
-

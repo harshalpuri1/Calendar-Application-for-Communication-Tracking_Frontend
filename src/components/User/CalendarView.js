@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import './CalenderView.css';
+import './CalendarView.css';
+import Navbar from '../Navbar/Navbar';
 
-const CalenderView = () => {
+const CalendarView = () => {
   // Static data for past and upcoming communications
   const communications = {
     past: [
@@ -20,7 +21,16 @@ const CalenderView = () => {
   const months = [
     { name: 'January 2025', days: 31, startDay: new Date('2025-01-01').getDay() },
     { name: 'February 2025', days: 28, startDay: new Date('2025-02-01').getDay() }, // Not a leap year
-    // Add other months if needed
+    { name: 'March 2025', days: 31, startDay: new Date('2025-03-01').getDay() },
+    { name: 'April 2025', days: 30, startDay: new Date('2025-04-01').getDay() },
+    { name: 'May 2025', days: 31, startDay: new Date('2025-05-01').getDay() },
+    { name: 'June 2025', days: 30, startDay: new Date('2025-06-01').getDay() },
+    { name: 'July 2025', days: 31, startDay: new Date('2025-07-01').getDay() },
+    { name: 'August 2025', days: 31, startDay: new Date('2025-08-01').getDay() },
+    { name: 'September 2025', days: 30, startDay: new Date('2025-09-01').getDay() },
+    { name: 'October 2025', days: 31, startDay: new Date('2025-10-01').getDay() },
+    { name: 'November 2025', days: 30, startDay: new Date('2025-11-01').getDay() },
+    { name: 'December 2025', days: 31, startDay: new Date('2025-12-01').getDay() },
   ];
 
   const getCommunicationDetails = (date) => {
@@ -74,6 +84,7 @@ const CalenderView = () => {
 
   return (
     <div className="calendar-container">
+      <Navbar showExtras={true} />
       <h1>Communication Calendar</h1>
       <div className="navigation-buttons">
         <button
@@ -116,4 +127,4 @@ const CalenderView = () => {
   );
 };
 
-export default CalenderView;
+export default CalendarView;

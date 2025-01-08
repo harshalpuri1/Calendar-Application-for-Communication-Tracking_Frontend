@@ -9,7 +9,7 @@ const constants = {
     serverError: "/server-error",
     loginLink: "/",
     UserDashboard:"/user",
-    settings:"/settings"
+    AdminDAshboard:"/admin"
   },
   constantsErrors: {
     sessionExpire: "Your session has expired. Please log in again.",
@@ -23,15 +23,16 @@ const constants = {
     loginAdmin: "/admin/login",
     signupUser: "/signup/user",
     loginUser: "/login/user",
-    logout: "/logout/user"
+    logout: "/logout/user",
+    forgotPassword: "/forgot-password"
   },
- localStorage: {
-  authToken: "Authorization",
-  userEmail: "Email",
-  token:"Token"
-  
- }
-
+  localStorage: {
+    authToken: "Authorization",
+    userEmail: "Email",
+    userToken: "UserToken",
+    adminToken: "AdminToken",
+    AdminEmail: "AdminEmail"
+  }
 };
 
 export default constants;

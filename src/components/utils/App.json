@@ -1,7 +1,8 @@
 {
     "main": "/",
-    "signin": "/signin",
-    "signup": "/signup",
-    "certificate": "/certificate",
-    "settings": "/settings"
+    "calendar": "/calendar",
+    "notifications": "/notifications",
+    "admin": "/admin",
+    "user": "/user",
+    "forgotPassword": "/forgot-password"
 }

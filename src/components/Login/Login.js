@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // For navigation
-import { toast, Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import "./Login.css";
-import services from "./../utils/config/services.js";
+import api from "../services/api";
+import constants from "../utils/config/config";
 
 function LoginPage() {
   const [activeTab, setActiveTab] = useState("user");
@@ -13,7 +14,6 @@ function LoginPage() {
 
   return (
     <div className="app-container">
-      <Toaster position="top-right" reverseOrder={false} />
       <div className="tabs">
         <button
           className={`tab-button ${activeTab === "user" ? "active" : ""}`}
@@ -38,7 +38,7 @@ function LoginPage() {
 }
 
 function UserForm() {
-  const [isRegister, setIsRegister] = useState(false); // Toggle between Login and Register modes
+  const [isRegister, setIsRegister] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -46,7 +46,7 @@ function UserForm() {
     confirmPassword: "",
   });
 
-  const navigate = useNavigate(); // For navigation to the dashboard
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -55,17 +55,15 @@ function UserForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (isRegister && formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match!");
       return;
     }
-
-    const apiUrl = isRegister
-      ? `${services.baseURL}/signup/user`
-      : `${services.baseURL}/login/user`;
-
-    const payload = isRegister
+  
+    const loadingToast = toast.loading("Processing...");
+  
+    const data = isRegister
       ? {
           username: formData.username,
           email: formData.email,
@@ -76,40 +74,37 @@ function UserForm() {
           email: formData.email,
           password: formData.password,
         };
-
-        toast(
-          "Sorry for the inconvenience, but our backend is currently on render.com Sometimes it gives late response. Please try again in 30 seconds.",
-          {
-            duration: 6000,
-          }
-        );
-    const loadingToast = toast.loading("Processing...");
-
-
+  
+    toast(
+      "Sorry for the inconvenience, but our backend is currently on render.com. Sometimes it gives a late response. Please try again in 30 seconds.",
+      {
+        duration: 6000,
+      }
+    );
+  
     try {
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        toast.success(data.message || (isRegister ? "Registration successful!" : "Login successful!"), {
+      const response = isRegister
+        ? await api.registerUser(data)
+        : await api.loginUser(data);
+  
+      if (response) {
+        toast.success(response.message || (isRegister ? "Registration successful!" : "Login successful!"), {
           id: loadingToast,
         });
-        if (!isRegister) {
+  
+        if (!isRegister && response.body.token) {
+          localStorage.setItem(constants.localStorage.userToken, response.body.token);
           navigate("/user");
         }
       } else {
-        toast.error(data.message || "Something went wrong!", { id: loadingToast });
+        toast.error(response.message || "Something went wrong!", { id: loadingToast });
       }
     } catch (error) {
       console.error("Error:", error);
       toast.error("Failed to connect to the server!", { id: loadingToast });
     }
   };
+  
 
   return (
     <div className="form-container">
@@ -204,23 +199,15 @@ function AdminForm() {
     const loadingToast = toast.loading("Processing...");
 
     try {
-      const response = await fetch(`${services.baseURL}/admin/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
+      const response = await api.loginAdmin(formData);
 
-      const data = await response.json();
-
-      if (response.ok) {
-        toast.success(data.message || "Admin Login successful!", { id: loadingToast });
-        localStorage.setItem("AdminEmail", formData.email);
+      if (response.status && response.body) {
+        toast.success(response.message || "Admin Login successful!", { id: loadingToast });
+        localStorage.setItem(constants.localStorage.adminToken, response.token);
+        localStorage.setItem(constants.localStorage.AdminEmail, formData.email);
         navigate("/admin");
       } else {
-        toast.error(data.message || "Something went wrong!", { id: loadingToast });
+        toast.error(response.message || "Something went wrong!", { id: loadingToast });
       }
     } catch (error) {
       console.error("Error:", error);

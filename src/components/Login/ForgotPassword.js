@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
 import './ForgotPassword.css';
+import api from "../services/api";
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email) {
-      setMessage('If this email is registered, a reset link will be sent to it.');
-    } else {
+
+    if (!email) {
       setMessage('Please enter a valid email.');
+      return;
+    }
+
+    try {
+      const response = await api.forgotPassword({ email });
+      setMessage(response.message || 'If this email is registered, a reset link will be sent to it.');
+    } catch (error) {
+      setMessage('Failed to connect to the server!');
     }
   };
 

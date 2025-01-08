@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './Notifications.css';
-import { BellDot } from "lucide-react";
+import Navbar from "../Navbar/Navbar";
 
 const NotificationPage = () => {
   const [notifications] = useState([
@@ -16,12 +16,9 @@ const NotificationPage = () => {
 
   return (
     <div className="notification-container">
+       <Navbar showExtras={true} />
       <div className="notifications-header">
         <h1>Notifications</h1>
-        <div className="notification-badge-dot">
-        <BellDot />
-          {notifications.filter((notif) => notif.dueDate === today || notif.overdue).length}
-        </div>
       </div>
 
       <div className="notifications-grid">

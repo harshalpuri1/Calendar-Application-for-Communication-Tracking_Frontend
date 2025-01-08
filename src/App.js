@@ -3,10 +3,11 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 import AdminDashboard from './components/Admin/AdminDashboard';
 import UserDashboard from './components/User/UserDashboard';
 import Notifications from './components/User/Notifications';
-import CalendarView from './components/User/CalenderView';
 import LoginPage from './components/Login/Login';
 import ForgotPassword from './components/Login/ForgotPassword';
 import { AppRoutes } from './routes/AppRoutes';
+import CalendarView from './components/User/CalendarView';
+import strings from './components/utils/App.json';
 
 const App = () => {
   return (
@@ -15,12 +16,12 @@ const App = () => {
       <div>
       <AppRoutes/> 
         <Routes>
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/user" element={<UserDashboard />} />
-          <Route path='/notifications' element={<Notifications/>} />
-          <Route path='/calender' element={<CalendarView/>} />
-          <Route path="/" element={<LoginPage/>} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path={strings.main} element={<LoginPage/>} />
+          <Route path={strings.forgotPassword} element={<ForgotPassword />} />
+          <Route path={strings.admin} element={<AdminDashboard />} />
+          <Route path={strings.user}element={<UserDashboard />} />
+          <Route path={strings.notifications} element={<Notifications/>} />
+          <Route path={strings.calendar} element={<CalendarView/>} />
         </Routes>
       </div>
     </HashRouter>

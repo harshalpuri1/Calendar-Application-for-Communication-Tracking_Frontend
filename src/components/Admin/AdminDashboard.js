@@ -1,7 +1,7 @@
-// src/components/Admin/AdminDashboard.jsx
 import React, { useState } from "react";
 import CompanyManagement from "./CompanyManagement";
 import CommunicationMethodManagement from "./CommunicationMethodManagement";
+import Navbar from '../Navbar/Navbar'; // Import Navbar component
 import './AdminDashboard.css'
 
 const AdminDashboard = () => {
@@ -9,6 +9,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="admin-dashboard">
+      <Navbar showExtras={false} />
       <h1>Admin Dashboard</h1>
       <div className="tabs">
         <button onClick={() => setActiveTab("companies")}>Company Management</button>
