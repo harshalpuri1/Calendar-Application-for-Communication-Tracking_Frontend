@@ -9,7 +9,7 @@ const CommunicationMethodManagement = () => {
   const [deleteId, setDeleteId] = useState(null); // For delete confirmation modal
 
   const API_BASE_URL =
-    "https://calendar-application-for-communication.onrender.com/api/v1/communication/methods";
+    "https://calendar-application-for-communi-production.up.railway.app/api/v1/communication/methods";
 
   const fetchMethods = async () => {
     try {

@@ -1,4 +1,4 @@
-const baseURL= "https://calendar-application-for-communication.onrender.com/api/v1";
+const baseURL= "https://calendar-application-for-communi-production.up.railway.app/api/v1";
 const services =  {
 baseURL
 }

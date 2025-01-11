@@ -23,7 +23,7 @@ const CompanyManagement = () => {
   const [deleteId, setDeleteId] = useState(null);
 
   const baseUrl =
-    "https://calendar-application-for-communication.onrender.com/api/v1/company";
+    "https://calendar-application-for-communi-production.up.railway.app/api/v1/company";
 
   const fetchCompanies = async () => {
     try {
