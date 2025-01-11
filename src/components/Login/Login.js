@@ -7,9 +7,11 @@ import constants from "../utils/config/config";
 
 function LoginPage() {
   const [activeTab, setActiveTab] = useState("user");
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   const handleTabSwitch = (tab) => {
     setActiveTab(tab);
+    setShowForgotPassword(false);
   };
 
   return (
@@ -31,13 +33,19 @@ function LoginPage() {
         </button>
       </div>
       <div className="tab-content">
-        {activeTab === "user" ? <UserForm /> : <AdminForm />}
+        {showForgotPassword ? (
+          <ForgotPasswordForm />
+        ) : activeTab === "user" ? (
+          <UserForm setShowForgotPassword={setShowForgotPassword} />
+        ) : (
+          <AdminForm setShowForgotPassword={setShowForgotPassword} />
+        )}
       </div>
     </div>
   );
 }
 
-function UserForm() {
+function UserForm({ setShowForgotPassword }) {
   const [isRegister, setIsRegister] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
@@ -55,14 +63,14 @@ function UserForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (isRegister && formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match!");
       return;
     }
-  
+
     const loadingToast = toast.loading("Processing...");
-  
+
     const data = isRegister
       ? {
           username: formData.username,
@@ -74,24 +82,24 @@ function UserForm() {
           email: formData.email,
           password: formData.password,
         };
-  
+
     toast(
       "Sorry for the inconvenience, but our backend is currently on render.com. Sometimes it gives a late response. Please try again in 30 seconds.",
       {
         duration: 6000,
       }
     );
-  
+
     try {
       const response = isRegister
         ? await api.registerUser(data)
         : await api.loginUser(data);
-  
+
       if (response) {
         toast.success(response.message || (isRegister ? "Registration successful!" : "Login successful!"), {
           id: loadingToast,
         });
-  
+
         if (!isRegister && response.body.token) {
           localStorage.setItem(constants.localStorage.userToken, response.body.token);
           navigate("/user");
@@ -104,7 +112,6 @@ function UserForm() {
       toast.error("Failed to connect to the server!", { id: loadingToast });
     }
   };
-  
 
   return (
     <div className="form-container">
@@ -155,7 +162,7 @@ function UserForm() {
           />
         )}
         <div className="form-options">
-          <a href="/forgot-password" id="forgotPasswordLink">Forgot your password?</a>
+          <p className="toggle-mode" onClick={() => setShowForgotPassword(true)} id="forgotPasswordLink">Forgot your password?</p>
         </div>
         <button type="submit" className="submit-button" id="userSubmitButton">
           {isRegister ? "Register" : "Log In"}
@@ -175,7 +182,7 @@ function UserForm() {
   );
 }
 
-function AdminForm() {
+function AdminForm({ setShowForgotPassword }) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -240,10 +247,60 @@ function AdminForm() {
           id="adminPasswordInput"
         />
         <div className="form-options">
-          <a href="/forgot-password" id="forgotPasswordLinkAdmin">Forgot your password?</a>
+          {/* <p className="toggle-mode" onClick={() => setShowForgotPassword(true)} id="forgotPasswordLinkAdmin">Forgot your password?</p> */}
         </div>
         <button type="submit" className="submit-button" id="adminSubmitButton">
           Log In
+        </button>
+      </form>
+    </div>
+  );
+}
+
+function ForgotPasswordForm() {
+  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const loadingToast = toast.loading("Processing...");
+
+    try {
+      const response = await api.forgotPassword({ email });
+
+      if (response.status) {
+        toast.success(response.message || "Password reset link sent!", { id: loadingToast });
+        navigate("/");
+      } else {
+        toast.error(response.message || "Something went wrong!", { id: loadingToast });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Failed to connect to the server!", { id: loadingToast });
+    }
+  };
+
+  return (
+    <div className="form-container">
+      <h2>Forgot Password</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={email}
+          onChange={handleInputChange}
+          required
+          className="input-field"
+          id="forgotPasswordEmailInput"
+        />
+        <button type="submit" className="submit-button" id="forgotPasswordSubmitButton">
+          Send Reset Link
         </button>
       </form>
     </div>
