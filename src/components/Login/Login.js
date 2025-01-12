@@ -32,7 +32,7 @@ function LoginPage() {
           Admin Login
         </button>
       </div>
-      <div className="tab-content">
+      <div className="tab-contents">
         {showForgotPassword ? (
           <ForgotPasswordForm />
         ) : activeTab === "user" ? (

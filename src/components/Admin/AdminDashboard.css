@@ -19,6 +19,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    padding: 8px;
     gap: 10px;
   }
   
@@ -58,3 +59,19 @@
   .checkbox{
     width: 0;
   }
+
+
+  @media (max-width: 480px) {
+    .admin-dashboard {
+        padding: 5px;
+    }
+    .company-list li {
+      padding: 10px;
+    }
+    .tabs{
+      padding: 0;
+    }
+    .tab-content{
+      padding: 10px;
+    }
+}

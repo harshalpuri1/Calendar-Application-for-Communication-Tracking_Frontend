@@ -25,7 +25,6 @@ select {
     border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 1rem;
-    /* width: 100%; */
     box-sizing: border-box;
     transition: all 0.3s ease;
 }
@@ -95,6 +94,7 @@ button:hover {
     transition: all 0.3s ease;
     cursor: pointer;
 }
+
 strong {
     font-weight: bold;
     font-size: 0.9rem;
@@ -111,12 +111,12 @@ strong {
     gap: 10px;
 }
 
-.EDbutton{
+.EDbutton {
     display: flex;
     justify-content: space-around;
 }
 
-.EDbutton button{
+.EDbutton button {
     width: 100px;
     margin: 5px;
 }
@@ -149,7 +149,35 @@ strong {
 }
 
 /* Responsive Design for smaller screens */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+    .company-list ul {
+        grid-template-columns: repeat(3, 1fr); /* 2 items per row */
+    }
+
+    .form {
+        gap: 10px;
+    }
+
+    input,
+    textarea,
+    select {
+        font-size: 0.9rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .action-buttons button {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 900px) {
     .company-list ul {
         grid-template-columns: repeat(2, 1fr); /* 2 items per row */
     }
@@ -177,13 +205,13 @@ strong {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
     .company-list ul {
         grid-template-columns: 1fr; /* 1 item per row */
     }
 
     div {
-        padding: 15px;
+        padding: 0;
     }
 
     button {
@@ -191,12 +219,12 @@ strong {
     }
 
     .company-list {
-        padding: 15px;
+        padding: 10px;
     }
 }
+
 .error-message {
     color: red;
     font-weight: bold;
     margin-bottom: 10px;
-  }
-  
+}
