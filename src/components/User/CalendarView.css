@@ -152,3 +152,80 @@
 .details-popup button:hover {
   background: #008c9e;
 }
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .calendar-container {
+    width: 90%;
+  }
+
+  .header {
+    font-size: 22px;
+  }
+
+  .calendar-header {
+    font-size: 16px;
+  }
+
+  .calendar-cell {
+    padding-top: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .calendar-container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .header {
+    font-size: 20px;
+  }
+
+  .calendar-header {
+    font-size: 14px;
+  }
+
+  .calendar-cell {
+    padding-top: 80%;
+  }
+
+  .navigation-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navigation-button {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .header {
+    font-size: 18px;
+  }
+
+  .calendar-header {
+    font-size: 12px;
+  }
+
+  .calendar-cell {
+    padding-top: 70%;
+  }
+
+  .navigation-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navigation-button {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+}
