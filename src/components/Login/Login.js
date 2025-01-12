@@ -83,13 +83,6 @@ function UserForm({ setShowForgotPassword }) {
           password: formData.password,
         };
 
-    toast(
-      "Sorry for the inconvenience, but our backend is currently on render.com. Sometimes it gives a late response. Please try again in 30 seconds.",
-      {
-        duration: 6000,
-      }
-    );
-
     try {
       const response = isRegister
         ? await api.registerUser(data)
@@ -197,12 +190,6 @@ function AdminForm({ setShowForgotPassword }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    toast(
-      "Sorry for the inconvenience, but our backend is currently on render.com Sometimes it gives late response. Please try again in 30 seconds.",
-      {
-        duration: 6000,
-      }
-    );
     const loadingToast = toast.loading("Processing...");
 
     try {
