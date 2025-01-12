@@ -1,4 +1,3 @@
-// src/components/UserDashboard.jsx
 import React, { useState } from "react";
 import "./UserDashboard.css";
 import Navbar from "../Navbar/Navbar";
@@ -156,14 +155,14 @@ const UserDashboard = () => {
         <tbody>
           {sampleData.map((company, index) => (
             <tr key={index} className={getHighlightClass(company)}>
-              <td>
+              <td data-label="Select">
                 <input
                   type="checkbox"
                   onChange={() => handleCompanySelection(company.companyName)}
                 />
               </td>
-              <td>{company.companyName}</td>
-              <td>
+              <td data-label="Company Name">{company.companyName}</td>
+              <td data-label="Last Five Communications">
                 <ul>
                   {company.recentCommunications.map((comm, idx) => (
                     <li key={idx} className="communication-item">
@@ -173,7 +172,7 @@ const UserDashboard = () => {
                   ))}
                 </ul>
               </td>
-              <td>
+              <td data-label="Next Scheduled Communication">
                 <div>
                   {company.nextCommunication.type} -{" "}
                   {company.nextCommunication.date}

@@ -1,7 +1,6 @@
 /* Global Styling */
 .dashboard-container {
   font-family: Arial, sans-serif;
-  margin: 20px;
   color: #333;
   line-height: 1.8;
 }
@@ -228,5 +227,34 @@ h2 {
   .navbar-buttons {
     top: 20px;
     right: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .company-table th, .company-table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .addCommButton {
+    width: 100%;
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .modal {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .modal input, .modal select, .modal textarea {
+    padding: 8px;
+  }
+
+  .modal button {
+    padding: 10px;
+  }
+  .dashboard-container{
+    margin: 0;
   }
 }
