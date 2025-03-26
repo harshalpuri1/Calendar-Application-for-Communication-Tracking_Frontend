@@ -121,40 +121,35 @@ const forgotPassword = async (body) => {
   }
 };
 
-const getCompanies = async (params) => {
+const handleRequest = async (request) => {
   try {
-    const response = await apiInstance.get("/company/get", { params });
-    return response ? response : response.data;
+    return await request;
   } catch (error) {
     return error.data ? error.data : error;
   }
 };
 
-const createCompany = async (body) => {
-  try {
-    const response = await apiInstance.post("/company/add", body);
-    return response.data ? response.data : response;
-  } catch (error) {
-    return error.data ? error.data : error;
-  }
+const companyService = {
+  getCompanies: (params) =>
+    handleRequest(apiInstance.get("/company/get", { params })),
+  createCompany: (body) =>
+    handleRequest(apiInstance.post("/company/add", body)),
+  updateCompany: (id, body) =>
+    handleRequest(apiInstance.put(`/company/update/${id}`, body)),
+  deleteCompany: (id) =>
+    handleRequest(apiInstance.delete(`/company/delete/${id}`)),
 };
 
-const updateCompany = async (id, body) => {
-  try {
-    const response = await apiInstance.put(`/company/update/${id}`, body);
-    return response.data ? response.data : response;
-  } catch (error) {
-    return error.data ? error.data : error;
-  }
-};
-
-const deleteCompany = async (id) => {
-  try {
-    const response = await apiInstance.delete(`/company/delete/${id}`);
-    return response.data ? response.data : response;
-  } catch (error) {
-    return error.data ? error.data : error;
-  }
+// Communication Methods Services
+const communicationService = {
+  getMethods: (params) =>
+    handleRequest(apiInstance.get("/communication/methods", { params })),
+  createMethod: (body) =>
+    handleRequest(apiInstance.post("/communication/methods", body)),
+  updateMethod: (id, body) =>
+    handleRequest(apiInstance.put(`/communication/methods/${id}`, body)),
+  deleteMethod: (id) =>
+    handleRequest(apiInstance.delete(`/communication/methods/${id}`)),
 };
 
 const api = {
@@ -164,10 +159,8 @@ const api = {
   loginUser,
   logoutUser,
   forgotPassword,
-  getCompanies,
-  createCompany,
-  updateCompany,
-  deleteCompany
+  ...companyService,
+  ...communicationService
 };
 
 export default api;
